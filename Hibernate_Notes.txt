@@ -30,3 +30,17 @@ What is a dialect?
 	Even though we use SQL to talk to a dabase, but there are some nuiances which are specific to a database.
 	The way we use queries in Oracle is different is from the way we run queries in MySQL.
 	if we specify the dialect, hibernate will then use that particular dialect to write sql queries.
+	
+	
+	
+Annotations:
+@Entity (javax.persistence) - tells hibernate to treat the class as an entity
+@Id (javax.persistence) - tells hibernate to treat the field as primary key
+
+
+Using Hibernate API
+	1. create a session factory
+		(only one object per application)
+		creates sessions depending of no of sessions required
+		we get a session from the session factory to do any operation in database
+	

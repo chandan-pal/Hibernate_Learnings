@@ -10,3 +10,23 @@ What is an ORM (Object Relational Mapping) Tool:
 		2. mapping relationships
 		3. handling data types
 		4. mamaging changes to object state
+		
+Steps we generally have to perform without hibernate:
+	- JDBC Database configuration
+	- The Model(bean) object
+	- Service method to create the model object
+	- Database design
+	- DAO methods to save the object using SQL queries
+	
+Steps with hibernate:
+	- JDBC database configuration (hibernate configuration)
+	- The Model (bean) object - Annotations
+	- Service method to create the model object - use the hibernate API
+	- Database design - Not Needed!
+	- DAO methods to save the object using SQL queries - Not Needed!
+	
+What is a dialect?
+	dialect is a configuration for hibernate to know what kind of language to use while talking to database.
+	Even though we use SQL to talk to a dabase, but there are some nuiances which are specific to a database.
+	The way we use queries in Oracle is different is from the way we run queries in MySQL.
+	if we specify the dialect, hibernate will then use that particular dialect to write sql queries.

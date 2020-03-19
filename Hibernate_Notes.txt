@@ -36,6 +36,13 @@ Natural Key vs Surrogate Key:
 	but if there is not any column or you are not sure about any column which can be marked as unique, then a separtae column (like serialNo.) just for uniqueness of rows. such keys/colums is called as surrogate key.
 	
 	
+Entity Object vs Value Object:
+	Entity is independent
+	Entity cotains data which has a meaning on its own (like a User object)
+	
+	Value object is an object that has data which does not have meaning on its own, but provides meaning to othet object.
+	Like Address object. An Address object if defined does not have a meaning until it is give whose address is it.
+	
 hibernate configurations:
       <!-- SQL Dialect -->
       <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>

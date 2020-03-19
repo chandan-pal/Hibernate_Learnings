@@ -66,6 +66,8 @@ Annotations:
 @Transient : tell hibernate not to consider a field for persistence (hibernate also ignores fields which are transient or static variable)
 @Temporal(TemporalType.DATE) : for date fields to use different formats of date
 @Lob : large object (clob/blob) hibernate chooses a clob or blob depending on the type (byte array or String)
+@GeneratedValue : tells hibernate to generate an automatic value for that field/column with default generation strategy
+@GeneratedValue(strategy=GenerationType.SEQUENCE) : tells hibernate to generate an automatic value for that field/column with specific strategy
 
 Note: @Id, @Column can also added on top of getter method in place of on top of the field (In that case the values which are returned from the getter will be saved, and not the value of the field directly)
 

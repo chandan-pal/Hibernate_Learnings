@@ -31,6 +31,10 @@ What is a dialect?
 	The way we use queries in Oracle is different is from the way we run queries in MySQL.
 	if we specify the dialect, hibernate will then use that particular dialect to write sql queries.
 	
+Natural Key vs Surrogate Key:
+	such columns which are unique as per business logic as called natural key.
+	but if there is not any column or you are not sure about any column which can be marked as unique, then a separtae column (like serialNo.) just for uniqueness of rows. such keys/colums is called as surrogate key.
+	
 	
 hibernate configurations:
       <!-- SQL Dialect -->

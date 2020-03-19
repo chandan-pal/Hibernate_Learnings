@@ -77,3 +77,8 @@ Using Hibernate API
 		creates sessions depending of no of sessions required
 		we get a session from the session factory to do any operation in database
 	
+	2. get session from the session factory
+	3. start transaction
+	4. perform required db operations
+	5. commit / abort transaction
+	6. close session

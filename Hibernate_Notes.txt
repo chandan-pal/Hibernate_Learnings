@@ -32,7 +32,26 @@ What is a dialect?
 	if we specify the dialect, hibernate will then use that particular dialect to write sql queries.
 	
 	
+hibernate configurations:
+      <!-- SQL Dialect -->
+      <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
+      
+      <!-- Database connection settings -->
+      <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/DBPocHibernate</property>
+      <property name="hibernate.connection.username">dbasys</property>
+      <property name="hibernate.connection.password">oracle</property>
+      
+      <!-- (create/update) : drop existing and re-create database schema / update in existing schema -->
+      <property name="hbm2ddl.auto">create</property>
+      
+	  <!-- show sql queries getting executed in console -->
+      <property name="show_sql">true</property>
+      
+	  <!-- classes in whic to look for hibernate annotations -->
+      <mapping class="in.chandanpal.pochibernate.model.UserDetails"/>
 	
+	
+
 Annotations:
 @Entity (javax.persistence) - tells hibernate to treat the class as an entity
 @Id (javax.persistence) - tells hibernate to treat the field as primary key

@@ -1,0 +1,12 @@
+HIBERNATE
+	- ORM Tool (Object Relation Mapping)
+	- used in data layer of applications
+	- implements JPA
+	
+What is an ORM (Object Relation Mapping) Tool:
+	- It solves the common problem of saving object from java to a persistent database against a table which generally represents the class schema.
+	- It solves the common problem of:
+		1. mapping member variables to columns
+		2. mapping relationships
+		3. handling data types
+		4. mamaging changes to object state

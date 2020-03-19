@@ -64,9 +64,9 @@ hibernate configurations:
 	
 
 Annotations:
-@Entity (javax.persistence) : tells hibernate to treat the class as an entity
-@Entity(name="USER_DETAILS"): tells hibernate to create entity with name passed instead of the class name
-@Id (javax.persistence) : tells hibernate to treat the field as primary key
+@Entity : (javax.persistence) : tells hibernate to treat the class as an entity
+@Entity(name="USER_DETAILS") : tells hibernate to create entity with name passed instead of the class name
+@Id : (javax.persistence) : tells hibernate to treat the field as primary key
 @Column : tells hibernate to create column corresponding to the field (it is optional, even if not provided, column will be created)
 @Column(name="USER_NAME") : tells hibernate to create column with the name passed instead of the field name directly.
 @Table(name="USER_DETAILS") : tells hibernate to create a table with the name passed.
@@ -80,7 +80,13 @@ Annotations:
 @AttributeOverride : helps to re-configure all the fields of an embedded object
 @EmbeddedId : if the embedded object has to act as a primary key (combination of all fields of the embedded object act as primary key for the current entity)
 @ElementCollection : tells hibernate to treat the field as a collection (creates a separtae table to store the collection field)
-
+@JoinTable(name="user_address") : tells hibernate to use a custom name for collection or join tables
+@JoinTable(joinColumns = @JoinColumn(name="userid")) : tells hibernate to use a custom name for foreign key in join table
+@CollectionId(columns = { @Column }, generator = "", type = @Type) : (org.hibernate.annotations) not a persistence annotation but specific to hibernate
+				tells hibernate to create a primary key column for a collections table
+				e.g. @GenericGenerator(name="sequencegen", strategy="sequence")
+				     @CollectionId(columns = { @Column(name="address_id") }, generator = "sequencegen", type = @Type(type="long"))
+				Note: to use @CollectionId use collection type which supports index, like list and set
 
 Note: @Id, @Column can also added on top of getter method in place of on top of the field (In that case the values which are returned from the getter will be saved, and not the value of the field directly)
 

@@ -31,6 +31,18 @@ What is a dialect?
 	The way we use queries in Oracle is different is from the way we run queries in MySQL.
 	if we specify the dialect, hibernate will then use that particular dialect to write sql queries.
 	
+Using Hibernate API
+	1. create a session factory
+		(only one object per application)
+		creates sessions depending of no of sessions required
+		we get a session from the session factory to do any operation in database
+	
+	2. get session from the session factory
+	3. start transaction
+	4. perform required db operations
+	5. commit / abort transaction
+	6. close session
+	
 Natural Key vs Surrogate Key:
 	such columns which are unique as per business logic as called natural key.
 	but if there is not any column or you are not sure about any column which can be marked as unique, then a separtae column (like serialNo.) just for uniqueness of rows. such keys/colums is called as surrogate key.
@@ -95,10 +107,10 @@ Annotations:
 @JoinTable(name="user_address") : tells hibernate to use a custom name for collection or join tables
 @JoinTable(joinColumns = @JoinColumn(name="userid")) : tells hibernate to use a custom name for foreign key in join table
 @CollectionId(columns = { @Column }, generator = "", type = @Type) : (org.hibernate.annotations) not a persistence annotation but specific to hibernate
-				tells hibernate to create a primary key column for a collections table
-				e.g. @GenericGenerator(name="sequencegen", strategy="sequence")
-				     @CollectionId(columns = { @Column(name="address_id") }, generator = "sequencegen", type = @Type(type="long"))
-				Note: to use @CollectionId use collection type which supports index, like list and set
+			tells hibernate to create a primary key column for a collections table
+			e.g. @GenericGenerator(name="sequencegen", strategy="sequence")
+			@CollectionId(columns = { @Column(name="address_id") }, generator = "sequencegen", type = @Type(type="long"))
+			Note: to use @CollectionId use collection type which supports index, like list and set
 @OneToOne  : on top of the field to create a one to one relationship, instead of embedding in the same table like collection
 			In this case a column is added in one entity to map with the primary key of another entity
 @OneToMany : on top of the field to create a one to many relationship, instead of embedding in the same table like collection
@@ -107,23 +119,34 @@ Annotations:
 			@JoinTable(name="user_vehicles", joinColumns=@JoinColumn(name="user_id"), inverseJoinColumns=@JoinColumn(name="vehicle_id"))
 @ManyToOne : on top of the field to create a one to many relationship, instead of embedding in the same table like collection
 			similar like one to many
-			
 			Note : for creating a mappedBy column for the many to one relationship, instead of creating a seperate mapping table - we have to add annotation @JoinColumn(name="columnName")
 @ManyToMany : on top of the field to create a mamy to many relationship. To be added on both entity ends. Two mapping tables are created by default, one for each side. To stop hibernate from creating two mapping tables for same mapping use mappedBy property.
 e.g @ManyToMany(mappedBy="<fieldNameOfOtherEntity>")
-
+@NotFound(action=NotFoundAction.IGNORE) : (org.hibernate.annotations) - tells hibernate what to do if there is no data for that field while fetching. Otherwise it will through exception
+@OneToMany(cascade = CascadeType.PERSIST) : tells hibernate to cascade the saving operation for the member entity also
 
 
 Note: @Id, @Column can also added on top of getter method in place of on top of the field (In that case the values which are returned from the getter will be saved, and not the value of the field directly)
 
-Using Hibernate API
-	1. create a session factory
-		(only one object per application)
-		creates sessions depending of no of sessions required
-		we get a session from the session factory to do any operation in database
+
+Hibernate Collections:
+	1. Bag semantic (unordered) - List / ArrayList
+	2. Bag semantic with ID (unordered with ID)- List / ArrayList
+	3. List semantic (List can be ordered) - List / ArrayList
+	4. Set semantic - Set
+	5. Map semantic - Map
 	
-	2. get session from the session factory
-	3. start transaction
-	4. perform required db operations
-	5. commit / abort transaction
-	6. close session
+Cascading Operations:
+	If one object has refernce to another object, then by default behaviour both the objects have to be operated individually then after that the relationship between both the objects is identified.
+	
+	e.g.
+	If "user" object has reference to "vehicle" object. the both user object and vehicle object have to be saved separately
+	User user = new User();
+	Vehicle vehicle = new Vehicle();
+	user.setVehicle(vehicle);
+	session.save(user) - will not save the vehicle object automatically.
+	session.save(vehicle) - this also needs to be done
+	
+	(Note: this is not the case for embedded objects, since vaule objects are stored in the same table)
+	
+	To tell hibernate to do this automatically we add "cascade" property on the relationship. This behaviour is called cascading. Cascading can be defined operation specific like PERSIST, DETACH, REMOVE, REFRESH, ALL etc.

@@ -43,6 +43,17 @@ Entity Object vs Value Object:
 	Value object is an object that has data which does not have meaning on its own, but provides meaning to othet object.
 	Like Address object. An Address object if defined does not have a meaning until it is give whose address is it.
 	
+	
+Lazy Fetch vs Eager Fetch:
+	With Lazy Fetch type hibernate does not initialize or fetches value for the entire object. Only the first level member variables are fetched. And other variables like list or another entity is fetched only when that variable is accessed (i.e getter for that variable is called.)
+	Lazy fetch is default behaviour of hibernate.
+	
+	To achieve this lazy fetch, hibernate creates a proxy class (dynamic sub-class of the actual object) which overrides some getter methods of the second level member variables, where the code for getting the value from db is written before calling the getter of actual class.
+	
+	
+	With Eager fetch strategy hibernate pull entire object in one go.
+	
+	
 hibernate configurations:
       <!-- SQL Dialect -->
       <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
@@ -80,6 +91,7 @@ Annotations:
 @AttributeOverride : helps to re-configure all the fields of an embedded object
 @EmbeddedId : if the embedded object has to act as a primary key (combination of all fields of the embedded object act as primary key for the current entity)
 @ElementCollection : tells hibernate to treat the field as a collection (creates a separtae table to store the collection field)
+@ElementCollection(fetch=FetchType.EAGER) : tells hibernate to treat the field as a collection with eager fetch strategy.
 @JoinTable(name="user_address") : tells hibernate to use a custom name for collection or join tables
 @JoinTable(joinColumns = @JoinColumn(name="userid")) : tells hibernate to use a custom name for foreign key in join table
 @CollectionId(columns = { @Column }, generator = "", type = @Type) : (org.hibernate.annotations) not a persistence annotation but specific to hibernate
@@ -87,6 +99,7 @@ Annotations:
 				e.g. @GenericGenerator(name="sequencegen", strategy="sequence")
 				     @CollectionId(columns = { @Column(name="address_id") }, generator = "sequencegen", type = @Type(type="long"))
 				Note: to use @CollectionId use collection type which supports index, like list and set
+				
 
 Note: @Id, @Column can also added on top of getter method in place of on top of the field (In that case the values which are returned from the getter will be saved, and not the value of the field directly)
 

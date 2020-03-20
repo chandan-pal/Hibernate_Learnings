@@ -105,6 +105,8 @@ Annotations:
 			In this case a seperate table is created to store the mapping between primary keys of both the tables
 			configuring the join table-
 			@JoinTable(name="user_vehicles", joinColumns=@JoinColumn(name="user_id"), inverseJoinColumns=@JoinColumn(name="vehicle_id"))
+@ManyToOne : on top of the field to create a one to many relationship, instead of embedding in the same table like collection
+			similar like one to many
 
 Note: @Id, @Column can also added on top of getter method in place of on top of the field (In that case the values which are returned from the getter will be saved, and not the value of the field directly)
 

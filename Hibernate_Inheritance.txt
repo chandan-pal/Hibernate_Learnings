@@ -28,3 +28,13 @@ Three types of inheritance startegy are available:
 @DiscriminatorValue("BIKE")
 	- on top of child entity
 	- to cofigure the value in descriminator type column to custom value, instead of default class name
+	
+
+TABLE_PER_CLASS strategy:
+	since all the object are getting stored in single table, some times queries can get very complex and involve costly performance when trying to perform a qurery on a specific type of class.
+	In those kind of scenarios, we can go for table per class startegy.
+	add annotation @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS) on the base/parent entity
+	Note: in this strategy the members of the parent along withh their annotations also are inheirted in the table of the child class.
+	
+
+

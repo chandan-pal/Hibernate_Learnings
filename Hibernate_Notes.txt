@@ -150,3 +150,21 @@ Cascading Operations:
 	(Note: this is not the case for embedded objects, since vaule objects are stored in the same table)
 	
 	To tell hibernate to do this automatically we add "cascade" property on the relationship. This behaviour is called cascading. Cascading can be defined operation specific like PERSIST, DETACH, REMOVE, REFRESH, ALL etc.
+
+
+CRUD operations in hibernate:
+	session.save(<object>);
+	session.get(<class>, <identifierValue>);
+	session.update(<object>);
+	session.delete(<object>);
+
+
+Transient, persistent and detached object:
+	Transient  : The entity object is instantiated, but not saved in the database. (i.e save is not called for that object)
+	
+	Persistent : The object is saved in the database (save for the object is called) - if save for an object is called, hibernate tracks the object for any changes in the object (even after save has been called), and updates the changes in database also
+	Note: update is not called for every change in the object state, but it figures out intelligently to call uodate only for last change in the object state.
+	
+	Detached   : Once the session is closed, hibernate stops tracking for any changes in the object, and the object is called detached object
+
+

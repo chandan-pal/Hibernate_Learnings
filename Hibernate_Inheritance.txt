@@ -1,0 +1,30 @@
+Inheritance of objects and Hibernate:
+
+	Hibernate by-default implements a strategy for inheritance called as a "sigle table strategy". Which means it will create one common table for all inheritance hierarchy objects. Hibernate add one extra column DTYPE (descriminator type) which indicates what class it actually is
+	
+	e.g. if TwoWheeler and FourWheeler extend Vehicle, then there will be only Vehicle table
+	+-------------+-----------+-----------------+----------------------+--------------------+
+	| DTYPE       | vehicleId | vehicleName     | steeringHandle       | steeringWheel      |
+	+-------------+-----------+-----------------+----------------------+--------------------+
+	| Vehicle     |         1 | General Vehicle | NULL                 | NULL               |
+	| TwoWheeler  |         2 | bike            | bike steering handle | NULL               |
+	| FourWheeler |         3 | car             | NULL                 | car steering wheel |
+	+-------------+-----------+-----------------+----------------------+--------------------+
+	
+	Note: Single table strategy is the default startegy for inheritance in hibernate.
+	
+	To explicitly configure the inheritance strategy we can add annotation @Inheritance on top of the base/parent entity.
+	e.g @Inheritance(strategy = InheritanceType.JOINED)
+	
+Three types of inheritance startegy are available:
+	1. JOINED
+	2. SINGLE_TABLE
+	3. TABLE_PER_CLASS
+
+@DiscriminatorColumn(name = "VEHICLE_TYPE", discriminatorType = DiscriminatorType.STRING)
+	- on top of base/parent entity
+	- to configure the DTYPE column
+
+@DiscriminatorValue("BIKE")
+	- on top of child entity
+	- to cofigure the value in descriminator type column to custom value, instead of default class name

@@ -36,5 +36,51 @@ TABLE_PER_CLASS strategy:
 	add annotation @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS) on the base/parent entity
 	Note: in this strategy the members of the parent along withh their annotations also are inheirted in the table of the child class.
 	
+	vehicle table
+	+-----------+-----------------+
+	| vehicleId | vehicleName     |
+	+-----------+-----------------+
+	|         1 | General Vehicle |
+	+-----------+-----------------+
+	
+	two wheeler table
+	+-----------+-------------+----------------------+
+	| vehicleId | vehicleName | steeringHandle       |
+	+-----------+-------------+----------------------+
+	|         2 | bike        | bike steering handle |
+	+-----------+-------------+----------------------+
+	
+	four wheeler table
+	+-----------+-------------+--------------------+
+	| vehicleId | vehicleName | steeringWheel      |
+	+-----------+-------------+--------------------+
+	|         3 | car         | car steering wheel |
+	+-----------+-------------+--------------------+
 
-
+JOINED strategy:
+	There will be sepearte table for each class, but all table will contain columns corresponding to specific class only. The indetifier/reference column is copied in all tables.
+	i.e. The fields/columns inherited from the base entity table does not go into the child entity. The child class specific fields/coloumns does not go to the base/parent table.
+	e.g.
+	
+	vehicle:
+	+-----------+-----------------+
+	| vehicleId | vehicleName     |
+	+-----------+-----------------+
+	|         1 | General Vehicle |
+	|         2 | bike            |
+	|         3 | car             |
+	+-----------+-----------------+
+	
+	two wheeler table
+	+----------------------+-----------+
+	| steeringHandle       | vehicleId |
+	+----------------------+-----------+
+	| bike steering handle |         2 |
+	+----------------------+-----------+
+	
+	four wheeler table
+	+--------------------+-----------+
+	| steeringWheel      | vehicleId |
+	+--------------------+-----------+
+	| car steering wheel |         3 |
+	+--------------------+-----------+

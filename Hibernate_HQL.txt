@@ -1,0 +1,27 @@
+HQL (Hibernate Query Language):
+
+Why ?
+	- to have more control over the data
+	- to retrieve data in bulk
+	- HQL queries allows us to think in terms of objects while generating the queries, unlike SQL where we need to build our quries based on the table and relations in the database.
+
+
+Query hibernateQuery = session.createQuery("from User"); //select * from User(class name) entity
+
+Query hibernateQuery = session.createQuery("select userName from User"); //select userName(field name) from User(class name) entity
+
+Query hibernateQuery = session.createQuery("select new map(userName, userId) from User"); //return a map for each object conitaining the fields
+
+Query hibernateQueryWithWhere = session.createQuery("from User where userName='New updated user name'"); //select * from User(class name) entity where userName(field name) = ?
+
+
+pagination in HQL:
+	hibernateQuery.setMaxResults(2); //set the maximum number of record in one go
+	hibernateQuery.setFirstResult(3); //set the start position
+
+
+parameterised queries - to prevent SQL injection attacks:
+	Query hibernateQueryWithParams = session.createQuery("from User where userId > ?1 and userName = ?2"); //select * from User(class name) entity where userName(field name) = ?
+	hibernateQueryWithParams.setParameter(1, 0);
+	hibernateQueryWithParams.setParameter(2, "User With Where");
+	List usersWithParams = hibernateQueryWithParams.list();

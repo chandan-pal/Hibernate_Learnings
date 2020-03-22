@@ -30,14 +30,14 @@ parameterised queries - to prevent SQL injection attacks:
 Named Queries:
 	Named queries allow to write all the common queries at the entity level. And that can be refered anywhere in the application
 	Named queries provide a way to consolidate all the queries at a perticular place and makes it easy to organize and maintain the queries.
-	@NameQuery(name="<nameOfTheQuery>", query="<hqlQuery>") : on top of an entity
+	@NamedQuery(name="<nameOfTheQuery>", query="<hqlQuery>") : on top of an entity
 	
-	with named query we can also write SQL quries
+	with named native query we can also write SQL quries
 	@NameNativeQuery(name="<nameOfTheQuery>", query="<SQLQuery>", resultClass=<className>) : on top of an entity
 	
 	e.g.
 	//named queries
-	Query namedQuery1 = session.getNamedQuery("user.byId");  //user.byId query is to be defined on an entity with annotation @NameQuery
+	Query namedQuery1 = session.getNamedQuery("user.byId");  //user.byId query is to be defined on an entity with annotation @NamedQuery
 	namedQuery1.setParameter(1, 5);
 	List namedQueryUsers = namedQuery1.list();
 	System.out.println("Named Query User = " + ((User)namedQueryUsers.get(0)).getUserName());

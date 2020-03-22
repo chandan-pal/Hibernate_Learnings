@@ -1,0 +1,33 @@
+JPA Criteria
+	SQL/HQL queries can become complex to maintain
+	Java developers have to learn SQL/HQL to perform queries
+	JPA Criteria helps to avoid quries using Criteria API
+	The JPA Criteria provides methods to add criteria, so it is easy for the java programmer to add criteria.
+	
+	
+e.g.
+	SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+	Session session = sessionFactory.openSession();
+	session.beginTransaction();
+	
+	//get criteria builder
+	CriteriaBuilder cb = session.getCriteriaBuilder();
+	
+	//create criteria for an entity
+	CriteriaQuery<User> criteria = cb.createQuery(User.class);  
+	
+	//set the root
+	Root<User> root = criteria.from(User.class);
+	
+	//set selects and criterion
+	criteria.select(root); //set selects
+//		criteria.select(root.get("userName")); //selects only userName field
+	criteria.where(cb.equal(root.get("userName"), "User With Where"));
+	
+	//execute the query
+	List userList = session.createQuery(criteria).getResultList();
+	
+	System.out.println("users = " + userList);
+	
+	session.getTransaction().commit();
+	session.close();

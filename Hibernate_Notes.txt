@@ -101,7 +101,7 @@ Annotations:
 @GeneratedValue : tells hibernate to generate an automatic value for that field/column with default generation strategy
 @GeneratedValue(strategy=GenerationType.SEQUENCE) : tells hibernate to generate an automatic value for that field/column with specific strategy
 @Embeddable : tells hibernate that this class can be embedded in another entity
-@Embedded : tells hibernate that this fiels has to be embedded inside the parent entity (means all the fields of this object will become the field of the entity class)
+@Embedded : tells hibernate that this fields has to be embedded inside the parent entity (means all the fields of this object will become the field of the entity class)
 @AttributeOverride : helps to re-configure all the fields of an embedded object
 @EmbeddedId : if the embedded object has to act as a primary key (combination of all fields of the embedded object act as primary key for the current entity)
 @ElementCollection : tells hibernate to treat the field as a collection (creates a separtae table to store the collection field)

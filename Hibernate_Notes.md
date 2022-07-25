@@ -89,84 +89,87 @@ but if there is not any column or you are not sure about any column which can be
 	
 
 ## Common Annotations
-@Entity : (javax.persistence) : tells hibernate to treat the class as an entity.
-@Entity(name="USER_DETAILS") : tells hibernate to create entity with name passed instead of the class name
-@Id : (javax.persistence) : tells hibernate to treat the field as primary key
-@Column : tells hibernate to create column corresponding to the field (it is optional, even if not provided, column will be created)
-@Column(name="USER_NAME") : tells hibernate to create column with the name passed instead of the field name directly.
-@Table(name="USER_DETAILS") : tells hibernate to create a table with the name passed.
-@Transient : tell hibernate not to consider a field for persistence (hibernate also ignores fields which are transient or static variable)
-@Temporal(TemporalType.DATE) : for date fields to use different formats of date
-@Lob : large object (clob/blob) hibernate chooses a clob or blob depending on the type (byte array or String)
-@GeneratedValue : tells hibernate to generate an automatic value for that field/column with default generation strategy
-@GeneratedValue(strategy=GenerationType.SEQUENCE) : tells hibernate to generate an automatic value for that field/column with specific strategy
-@Embeddable : tells hibernate that this class can be embedded in another entity
-@Embedded : tells hibernate that this fields has to be embedded inside the parent entity (means all the fields of this object will become the field of the entity class)
-@AttributeOverride : helps to re-configure all the fields of an embedded object
-@EmbeddedId : if the embedded object has to act as a primary key (combination of all fields of the embedded object act as primary key for the current entity)
-@ElementCollection : tells hibernate to treat the field as a collection (creates a separtae table to store the collection field)
-@ElementCollection(fetch=FetchType.EAGER) : tells hibernate to treat the field as a collection with eager fetch strategy.
-@JoinTable(name="user_address") : tells hibernate to use a custom name for collection or join tables
-@JoinTable(joinColumns = @JoinColumn(name="userid")) : tells hibernate to use a custom name for foreign key in join table
-@CollectionId(columns = { @Column }, generator = "", type = @Type) : (org.hibernate.annotations) not a persistence annotation but specific to hibernate
-			tells hibernate to create a primary key column for a collections table
+1. @Entity : (javax.persistence) : tells hibernate to treat the class as an entity.
+2. @Entity(name="USER_DETAILS") : tells hibernate to create entity with name passed instead of the class name
+3. @Id : (javax.persistence) : tells hibernate to treat the field as primary key
+4. @Column : tells hibernate to create column corresponding to the field (it is optional, even if not provided, column will be created)
+5. @Column(name="USER_NAME") : tells hibernate to create column with the name passed instead of the field name directly.
+6. @Table(name="USER_DETAILS") : tells hibernate to create a table with the name passed.
+7. @Transient : tell hibernate not to consider a field for persistence (hibernate also ignores fields which are transient or static variable)
+8. @Temporal(TemporalType.DATE) : for date fields to use different formats of date
+9. @Lob : large object (clob/blob) hibernate chooses a clob or blob depending on the type (byte array or String)
+10. @GeneratedValue : tells hibernate to generate an automatic value for that field/column with default generation strategy
+11. @GeneratedValue(strategy=GenerationType.SEQUENCE) : tells hibernate to generate an automatic value for that field/column with specific strategy
+12. @Embeddable : tells hibernate that this class can be embedded in another entity
+13. @Embedded : tells hibernate that this fields has to be embedded inside the parent entity (means all the fields of this object will become the field of the entity class)
+14. @AttributeOverride : helps to re-configure all the fields of an embedded object
+15. @EmbeddedId : if the embedded object has to act as a primary key (combination of all fields of the embedded object act as primary key for the current entity)
+16. @ElementCollection : tells hibernate to treat the field as a collection (creates a separtae table to store the collection field)
+17. @ElementCollection(fetch=FetchType.EAGER) : tells hibernate to treat the field as a collection with eager fetch strategy.
+18. @JoinTable(name="user_address") : tells hibernate to use a custom name for collection or join tables
+19. @JoinTable(joinColumns = @JoinColumn(name="userid")) : tells hibernate to use a custom name for foreign key in join table
+20. @CollectionId(columns = { @Column }, generator = "", type = @Type) : (org.hibernate.annotations) not a persistence annotation but specific to hibernate.
+			It tells hibernate to create a primary key column for a collections table
 			e.g. @GenericGenerator(name="sequencegen", strategy="sequence")
 			@CollectionId(columns = { @Column(name="address_id") }, generator = "sequencegen", type = @Type(type="long"))
 			Note: to use @CollectionId use collection type which supports index, like list and set
-@OneToOne  : on top of the field to create a one to one relationship, instead of embedding in the same table like collection
+21. @OneToOne  : on top of the field to create a one to one relationship, instead of embedding in the same table like collection
 			In this case a column is added in one entity to map with the primary key of another entity
-@OneToMany : on top of the field to create a one to many relationship, instead of embedding in the same table like collection
+22. @OneToMany : on top of the field to create a one to many relationship, instead of embedding in the same table like collection
 			In this case a seperate table is created to store the mapping between primary keys of both the tables
 			configuring the join table-
 			@JoinTable(name="user_vehicles", joinColumns=@JoinColumn(name="user_id"), inverseJoinColumns=@JoinColumn(name="vehicle_id"))
-@ManyToOne : on top of the field to create a one to many relationship, instead of embedding in the same table like collection
+23. @ManyToOne : on top of the field to create a one to many relationship, instead of embedding in the same table like collection
 			similar like one to many
 			Note : for creating a mappedBy column for the many to one relationship, instead of creating a seperate mapping table - we have to add annotation @JoinColumn(name="columnName")
-@ManyToMany : on top of the field to create a mamy to many relationship. To be added on both entity ends. Two mapping tables are created by default, one for each side. To stop hibernate from creating two mapping tables for same mapping use mappedBy property.
+24. @ManyToMany : on top of the field to create a mamy to many relationship. To be added on both entity ends. Two mapping tables are created by default, one for each side. To stop hibernate from creating two mapping tables for same mapping use mappedBy property.
 e.g @ManyToMany(mappedBy="<fieldNameOfOtherEntity>")
-@NotFound(action=NotFoundAction.IGNORE) : (org.hibernate.annotations) - tells hibernate what to do if there is no data for that field while fetching. Otherwise it will through exception
-@OneToMany(cascade = CascadeType.PERSIST) : tells hibernate to cascade the saving operation for the member entity also
+25. @NotFound(action=NotFoundAction.IGNORE) : (org.hibernate.annotations) - tells hibernate what to do if there is no data for that field while fetching. Otherwise it will through exception
+26. @OneToMany(cascade = CascadeType.PERSIST) : tells hibernate to cascade the saving operation for the member entity also
 
 
 Note: @Id, @Column can also added on top of getter method in place of on top of the field (In that case the values which are returned from the getter will be saved, and not the value of the field directly)
 
 
-Hibernate Collections:
+## Hibernate Collections:
 	1. Bag semantic (unordered) - List / ArrayList
 	2. Bag semantic with ID (unordered with ID)- List / ArrayList
 	3. List semantic (List can be ordered) - List / ArrayList
 	4. Set semantic - Set
 	5. Map semantic - Map
 	
-Cascading Operations:
-	If one object has refernce to another object, then by default behaviour both the objects have to be operated individually then after that the relationship between both the objects is identified.
+## Cascading Operations:
+If one object has refernce to another object, then by default behaviour both the objects have to be operated individually then after that the relationship between both the objects is identified.
+
+e.g.
+```
+If "user" object has reference to "vehicle" object. the both user object and vehicle object have to be saved separately
+User user = new User();
+Vehicle vehicle = new Vehicle();
+user.setVehicle(vehicle);
+session.save(user) - will not save the vehicle object automatically.
+session.save(vehicle) - this also needs to be done
+
+(Note: this is not the case for embedded objects, since vaule objects are stored in the same table)
+```
 	
-	e.g.
-	If "user" object has reference to "vehicle" object. the both user object and vehicle object have to be saved separately
-	User user = new User();
-	Vehicle vehicle = new Vehicle();
-	user.setVehicle(vehicle);
-	session.save(user) - will not save the vehicle object automatically.
-	session.save(vehicle) - this also needs to be done
-	
-	(Note: this is not the case for embedded objects, since vaule objects are stored in the same table)
-	
-	To tell hibernate to do this automatically we add "cascade" property on the relationship. This behaviour is called cascading. Cascading can be defined operation specific like PERSIST, DETACH, REMOVE, REFRESH, ALL etc.
+To tell hibernate to do this automatically we add "cascade" property on the relationship. This behaviour is called cascading. Cascading can be defined operation specific like PERSIST, DETACH, REMOVE, REFRESH, ALL etc.
 
 
-CRUD operations in hibernate:
-	session.save(<object>);
-	session.get(<class>, <identifierValue>);
-	session.update(<object>);
-	session.delete(<object>);
+## CRUD operations in hibernate:
+- session.save(<object>);
+- session.get(<class>, <identifierValue>);
+- session.update(<object>);
+- session.delete(<object>);
 
 
-Transient, persistent and detached object:
-	Transient  : The entity object is instantiated, but not saved in the database. (i.e save is not called for that object)
+## Transient, persistent and detached object:
+**Transient**  : The entity object is instantiated, but not saved in the database. (i.e save is not called for that object).\
 	
-	Persistent : The object is saved in the database (save for the object is called) - if save for an object is called, hibernate tracks the object for any changes in the object (even after save has been called), and updates the changes in database also
-	Note: update is not called for every change in the object state, but it figures out intelligently to call uodate only for last change in the object state.
-	
-	Detached   : Once the session is closed, hibernate stops tracking for any changes in the object, and the object is called detached object
+**Persistent** : The object is saved in the database (save for the object is called) - if save for an object is called, hibernate tracks the object for any changes in the object (even after save has been called), and updates the changes in database also.\
+
+Note: update is not called for every change in the object state, but it figures out intelligently to call uodate only for last change in the object state.\
+
+**Detached**   : Once the session is closed, hibernate stops tracking for any changes in the object, and the object is called detached object
 
 

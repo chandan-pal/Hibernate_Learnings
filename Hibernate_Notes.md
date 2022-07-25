@@ -108,11 +108,15 @@ but if there is not any column or you are not sure about any column which can be
 17. @ElementCollection(fetch=FetchType.EAGER) : tells hibernate to treat the field as a collection with eager fetch strategy.
 18. @JoinTable(name="user_address") : tells hibernate to use a custom name for collection or join tables
 19. @JoinTable(joinColumns = @JoinColumn(name="userid")) : tells hibernate to use a custom name for foreign key in join table
-20. @CollectionId(columns = { @Column }, generator = "", type = @Type) : (org.hibernate.annotations) not a persistence annotation but specific to hibernate.
-			It tells hibernate to create a primary key column for a collections table
-			e.g. @GenericGenerator(name="sequencegen", strategy="sequence")
-			@CollectionId(columns = { @Column(name="address_id") }, generator = "sequencegen", type = @Type(type="long"))
-			Note: to use @CollectionId use collection type which supports index, like list and set
+
+20. @CollectionId(columns = { @Column }, generator = "", type = @Type) : (org.hibernate.annotations) not a persistence annotation but specific to hibernate. It tells hibernate to create a primary key column for a collections table
+e.g. 
+``` 
+@GenericGenerator(name="sequencegen", strategy="sequence")
+@CollectionId(columns = { @Column(name="address_id") }, generator = "sequencegen", type = @Type(type="long")) 
+```
+Note: to use @CollectionId use collection type which supports index, like list and set.
+
 21. @OneToOne  : on top of the field to create a one to one relationship, instead of embedding in the same table like collection
 			In this case a column is added in one entity to map with the primary key of another entity
 22. @OneToMany : on top of the field to create a one to many relationship, instead of embedding in the same table like collection
@@ -125,9 +129,8 @@ but if there is not any column or you are not sure about any column which can be
 24. @ManyToMany : on top of the field to create a mamy to many relationship. To be added on both entity ends. Two mapping tables are created by default, one for each side. To stop hibernate from creating two mapping tables for same mapping use mappedBy property.
 e.g @ManyToMany(mappedBy="<fieldNameOfOtherEntity>")
 25. @NotFound(action=NotFoundAction.IGNORE) : (org.hibernate.annotations) - tells hibernate what to do if there is no data for that field while fetching. Otherwise it will through exception
-26. @OneToMany(cascade = CascadeType.PERSIST) : tells hibernate to cascade the saving operation for the member entity also
-
-
+26. @OneToMany(cascade = CascadeType.PERSIST) : tells hibernate to cascade the saving operation for the member entity also.
+	
 Note: @Id, @Column can also added on top of getter method in place of on top of the field (In that case the values which are returned from the getter will be saved, and not the value of the field directly)
 
 

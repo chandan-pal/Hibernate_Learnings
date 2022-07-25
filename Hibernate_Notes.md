@@ -6,26 +6,26 @@
 Hibernate allows us to think/focus in terms of objects and avoid all the complexities involved for mapping the objects in to a relational database.
 
 ## What is an ORM (Object Relational Mapping) Tool ?
-	- It solves the common problem of saving object from java to a persistent database against a table which generally represents the class schema.
-	- It solves the common problem of:
-		1. mapping member variables to columns
-		2. mapping relationships
-		3. handling data types
-		4. managing changes to object state
+ - It solves the common problem of saving object from java to a persistent database against a table which generally represents the class schema.
+ - It solves the common problem of:
+	1. mapping member variables to columns
+	2. mapping relationships
+	3. handling data types
+	4. managing changes to object state
 		
 Steps we generally have to perform without hibernate:
-	- JDBC Database configuration
-	- The Model(bean) object
-	- Service method to create the model object
-	- Database design
-	- DAO methods to save the object using SQL queries
+ - JDBC Database configuration
+ - The Model(bean) object
+ - Service method to create the model object
+ - Database design
+ - DAO methods to save the object using SQL queries
 	
 Steps with hibernate:
-	- JDBC database configuration (hibernate configuration)
-	- The Model (bean) object - Annotations
-	- Service method to create the model object - use the hibernate API
-	- Database design - Not Needed!
-	- DAO methods to save the object using SQL queries - Not Needed!
+ - JDBC database configuration (hibernate configuration)
+ - The Model (bean) object - Annotations
+ - Service method to create the model object - use the hibernate API
+ - Database design - Not Needed!
+ - DAO methods to save the object using SQL queries - Not Needed!
 	
 ## What is a dialect?
 	dialect is a configuration for hibernate to know what kind of language to use while talking to database.
@@ -50,7 +50,7 @@ such columns which are unique as per business logic as called natural key.\
 but if there is not any column or you are not sure about any column which can be marked as unique, then a separtae column (like serialNo.) just for uniqueness of rows. such keys/colums is called as surrogate key.
 	
 	
-Entity Object vs Value Object:
+## Entity Object vs Value Object:
 	Entity is independent
 	Entity cotains data which has a meaning on its own (like a User object)
 	
@@ -58,7 +58,7 @@ Entity Object vs Value Object:
 	Like Address object. An Address object if defined does not have a meaning until it is give whose address is it.
 	
 	
-Lazy Fetch vs Eager Fetch:
+## Lazy Fetch vs Eager Fetch:
 	With Lazy Fetch type hibernate does not initialize or fetches value for the entire object. Only the first level member variables are fetched. And other variables like list or another entity is fetched only when that variable is accessed (i.e getter for that variable is called.)
 	Lazy fetch is default behaviour of hibernate.
 	
@@ -68,7 +68,7 @@ Lazy Fetch vs Eager Fetch:
 	With Eager fetch strategy hibernate pull entire object in one go.
 	
 	
-hibernate configurations:
+## hibernate configurations:
       <!-- SQL Dialect -->
       <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
       
@@ -88,8 +88,8 @@ hibernate configurations:
 	
 	
 
-Annotations:
-@Entity : (javax.persistence) : tells hibernate to treat the class as an entity
+## Common Annotations
+@Entity : (javax.persistence) : tells hibernate to treat the class as an entity.
 @Entity(name="USER_DETAILS") : tells hibernate to create entity with name passed instead of the class name
 @Id : (javax.persistence) : tells hibernate to treat the field as primary key
 @Column : tells hibernate to create column corresponding to the field (it is optional, even if not provided, column will be created)

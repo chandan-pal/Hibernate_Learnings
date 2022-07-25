@@ -1,11 +1,11 @@
-HIBERNATE
-	- ORM Tool (Object Relational Mapping)
-	- used in data layer of applications
-	- implements JPA
+# HIBERNATE
+ - ORM Tool (Object Relational Mapping)
+ - used in data layer of applications
+ - implements JPA
 
 Hibernate allows us to think/focus in terms of objects and avoid all the complexities involved for mapping the objects in to a relational database.
 
-What is an ORM (Object Relational Mapping) Tool:
+## What is an ORM (Object Relational Mapping) Tool ?
 	- It solves the common problem of saving object from java to a persistent database against a table which generally represents the class schema.
 	- It solves the common problem of:
 		1. mapping member variables to columns
@@ -27,13 +27,13 @@ Steps with hibernate:
 	- Database design - Not Needed!
 	- DAO methods to save the object using SQL queries - Not Needed!
 	
-What is a dialect?
+## What is a dialect?
 	dialect is a configuration for hibernate to know what kind of language to use while talking to database.
 	Even though we use SQL to talk to a dabase, but there are some nuiances which are specific to a database.
 	The way we use queries in Oracle is different from the way we run queries in MySQL.
 	if we specify the dialect, hibernate will then use that particular dialect to write sql queries.
 	
-Using Hibernate API
+## Using Hibernate API
 	1. create a session factory
 		(only one object per application)
 		creates sessions depending of no of sessions required
@@ -45,9 +45,9 @@ Using Hibernate API
 	5. commit / abort transaction
 	6. close session
 	
-Natural Key vs Surrogate Key:
-	such columns which are unique as per business logic as called natural key.
-	but if there is not any column or you are not sure about any column which can be marked as unique, then a separtae column (like serialNo.) just for uniqueness of rows. such keys/colums is called as surrogate key.
+## Natural Key vs Surrogate Key
+such columns which are unique as per business logic as called natural key.\
+but if there is not any column or you are not sure about any column which can be marked as unique, then a separtae column (like serialNo.) just for uniqueness of rows. such keys/colums is called as surrogate key.
 	
 	
 Entity Object vs Value Object:

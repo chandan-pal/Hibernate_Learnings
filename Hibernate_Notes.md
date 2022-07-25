@@ -167,20 +167,22 @@ To tell hibernate to do this automatically we add "cascade" property on the rela
 ```
 
 ## Transient, persistent and detached object:
-**Transient**  : The entity object is instantiated, but not saved in the database. (i.e save is not called for that object).\
+**Transient**  : The entity object is instantiated, but not saved in the database. (i.e save is not called for that object).
 	
-**Persistent** : The object is saved in the database (save for the object is called) - if save for an object is called, hibernate tracks the object for any changes in the object (even after save has been called), and updates the changes in database also.\
+**Persistent** : The object is saved in the database (save for the object is called) - if save for an object is called, hibernate tracks the object for any changes in the object (even after save has been called), and updates the changes in database also.
 
-Note: update is not called for every change in the object state, but it figures out intelligently to call uodate only for last change in the object state.\
+Note: update is not called for every change in the object state, but it figures out intelligently to call uodate only for last change in the object state.
 
 **Detached**   : Once the session is closed, hibernate stops tracking for any changes in the object, and the object is called detached object
 
 
 ## Hibernate Caching
 The performance of the database access is handled using caching techniques. Following are the two different caching techniques available in the hibernate.
-First Level Caching is the default caching in hibernate. It executes query at the end of the transaction to reduce the interaction with the DB. It is associated with the session object.\
+First Level Caching is the default caching in hibernate. It executes query at the end of the transaction to reduce the interaction with the DB. It is associated with the session object.
+
 Second Level Caching is associated with the SessionFacory object. It loads the entity objects at the SessionFacory level while executing a transaction. As a result, those objects are available to the entire application and do not bound to a single user.
-Second level caching is configured in hibernate.cfg.xml file.\
+Second level caching is configured in hibernate.cfg.xml file.
+
 Following are the popular open source cache implementations
 - EH Cache (Easy Hibernate Cache)
 - OS Cache
